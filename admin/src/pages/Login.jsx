@@ -23,8 +23,9 @@ const Login = () => {
                 const {data} = await axios.post(`${backendUrl}/api/admin/login`, {email, password});
                 
                 if(data.success){
-                    //storing token in local storage
+                    //storing token in local storage so that if admin refresh he will be login
                     localStorage.setItem('aToken', data.token);
+                    console.log(data.token);
                     setAtoken(data.token);
 
                 }else{
