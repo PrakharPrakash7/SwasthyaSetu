@@ -24,7 +24,7 @@ const Login = () => {
                 
                 if(data.success){
                     //storing token in local storage so that if admin refresh he will be login
-                    localStorage.setItem('aToken', data.token);
+                    localStorage.setItem('atoken', data.token);
                     console.log(data.token);
                     setAtoken(data.token);
 
