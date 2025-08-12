@@ -94,7 +94,7 @@ const loginAdmin = async (req, res) => {
 const allDoctors = async (req, res) => {
     try {
 
-        //remove password from the doctors
+        //remove password from the doctors for response
         const doctors = await doctorModel.find({}).select('-password');
         res.json({ success: true, doctors });
     } catch (error) {
