@@ -10,7 +10,7 @@ const addDoctor = async (req, res) => {
     try {
         const {name,email,password,speciality,degree,experience,about,fees,address,date} = req.body;
         const imageFile = req.file;
-      //  console.log({name,email,password,speciality,degree,experience,about,fees,address,date},imageFile);
+      // console.log({name,email,password,speciality,degree,experience,about,fees,address,date},imageFile);
       //checking for all data to add doctor
         if (!name || !email || !password || !speciality || !degree || !experience || !about || !fees || !address ) {
             return res.json({success: false, message: 'Please fill all the fields that are missing'});
