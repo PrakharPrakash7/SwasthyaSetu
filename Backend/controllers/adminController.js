@@ -88,4 +88,19 @@ const loginAdmin = async (req, res) => {
     }
 }
 
-export { addDoctor, loginAdmin };
+
+//API to get all doctors for admin panel
+
+const allDoctors = async (req, res) => {
+    try {
+
+        //remove password from the doctors
+        const doctors = await doctorModel.find({}).select('-password');
+        res.json({ success: true, doctors });
+    } catch (error) {
+        console.error('Error fetching doctors:', error);
+        res.json({ success: false, message: error.message});
+    }
+};
+
+export { addDoctor, loginAdmin, allDoctors   };

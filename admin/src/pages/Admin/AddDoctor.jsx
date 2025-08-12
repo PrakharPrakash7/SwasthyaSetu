@@ -51,15 +51,15 @@ const AddDoctor = () => {
       const {data} = await axios.post(`${backendUrl}/api/admin/add-doctor`, formData, {headers:{atoken}})
       if(data.success){
         toast.success(data.message)
-        // setDocImg(false)
-        // setName('')
-        // setEmail('')
-        // setPassword('')
-        // setFees('')
-        // setAbout('')
-        // setDegree('')
-        // setAddress1('')
-        // setAddress2('')
+        setDocImg(false)
+        setName('')
+        setEmail('')
+        setPassword('')
+        setFees('')
+        setAbout('')
+        setDegree('')
+        setAddress1('')
+        setAddress2('')
         
       }
       else{
