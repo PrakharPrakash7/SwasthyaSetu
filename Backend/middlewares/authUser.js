@@ -3,9 +3,6 @@ import jwt from 'jsonwebtoken';
 //Token Verification for admin pass the token as atoken in headers
 //user authentification middleware
 const authUser = async (req, res, next) => {
-    
-
-  
 
     try {
         const {token} = req.headers;
