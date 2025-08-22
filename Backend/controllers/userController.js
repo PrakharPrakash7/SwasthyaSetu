@@ -99,77 +99,85 @@ const getProfile = async (req, res) => {
     }
 }
 
-// const updateProfile = async (req, res) => {
-//     try {
-
-//         const { userId, name, phone, address, dob, gender } = req.body;
-//         const imageFile = req.file;
-
-//         if (!name || !phone || !address || !dob || !gender) {
-//             return res.json({ success: false, message: 'Fill the missing details' })
-//         }
-
-//         await userModel.findByIdAndUpdate(userId, { name, phone, address: JSON.parse(address), dob, gender })
-
-//         if(imageFile) {
-
-//             // upload image to cloudinary
-//             const imageUpload = await cloudinary.uploader.upload(imageFile.path, {resource_type: 'image'});
-//             const imageUrl = imageUpload.secure_url;
-
-//             await userModel.findByIdAndUpdate(userId, { image: imageUrl });
-
-//         }
-
-//         res.json({success:true, message: "Profile updated successfully"});
-//     }
-//     catch (error) {
-//         console.error("Error logging in user:", error);
-//         return res.json({ success: false, message: error.message });
-//     }
-
-// }
 const updateProfile = async (req, res) => {
-  try {
-    const { userId, name, phone, address, dob, gender } = req.body;
-    const imageFile = req.file;
+    try {
 
-    if (!name || !phone || !address || !dob || !gender) {
-      return res.json({ success: false, message: 'Fill the missing details' });
+        const { userId, name, phone, address, dob, gender } = req.body;
+        const imageFile = req.file;
+
+        if (!name || !phone || !address || !dob || !gender) {
+            return res.json({ success: false, message: 'Fill the missing details' })
+        }
+        const parsedAddress = JSON.parse(address);
+
+        await userModel.findByIdAndUpdate(userId, { name, phone, address: parsedAddress, dob, gender })
+
+        if(imageFile) {
+
+            // upload image to cloudinary
+            const imageUpload = await cloudinary.uploader.upload(imageFile.path, {resource_type: 'image'});
+            const imageUrl = imageUpload.secure_url;
+
+            await userModel.findByIdAndUpdate(userId, { image: imageUrl });
+
+        }
+
+        res.json({success:true, message: "Profile updated successfully"});
+    }
+    catch (error) {
+        console.error("Error logging in user:", error);
+        return res.json({ success: false, message: error.message });
     }
 
-    // ✅ handle both cases: stringified JSON or plain object
-    let parsedAddress = address;
-    if (typeof address === "string") {
-      try {
-        parsedAddress = JSON.parse(address);
-      } catch (err) {
-        return res.json({ success: false, message: "Invalid address JSON format" });
-      }
-    }
+}
 
-    await userModel.findByIdAndUpdate(userId, {
-      name,
-      phone,
-      address: parsedAddress,
-      dob,
-      gender
-    });
 
-    if (imageFile) {
-      // upload image to cloudinary
-      const imageUpload = await cloudinary.uploader.upload(imageFile.path, {
-        resource_type: 'image'
-      });
-      await userModel.findByIdAndUpdate(userId, { image: imageUpload.secure_url });
-    }
 
-    res.json({ success: true, message: "Profile updated successfully" });
-  } catch (error) {
-    console.error("Error updating profile:", error);
-    return res.json({ success: false, message: error.message });
-  }
-};
+
+
+
+
+// const updateProfile = async (req, res) => {
+//   try {
+//     const { userId, name, phone, address, dob, gender } = req.body;
+//     const imageFile = req.file;
+
+//     if (!name || !phone || !address || !dob || !gender) {
+//       return res.json({ success: false, message: 'Fill the missing details' });
+//     }
+
+//     // ✅ handle both cases: stringified JSON or plain object
+//     let parsedAddress = address;
+//     if (typeof address === "string") {
+//       try {
+//         parsedAddress = JSON.parse(address);
+//       } catch (err) {
+//         return res.json({ success: false, message: "Invalid address JSON format" });
+//       }
+//     }
+
+//     await userModel.findByIdAndUpdate(userId, {
+//       name,
+//       phone,
+//       address: parsedAddress,
+//       dob,
+//       gender
+//     });
+
+//     if (imageFile) {
+//       // upload image to cloudinary
+//       const imageUpload = await cloudinary.uploader.upload(imageFile.path, {
+//         resource_type: 'image'
+//       });
+//       await userModel.findByIdAndUpdate(userId, { image: imageUpload.secure_url });
+//     }
+
+//     res.json({ success: true, message: "Profile updated successfully" });
+//   } catch (error) {
+//     console.error("Error updating profile:", error);
+//     return res.json({ success: false, message: error.message });
+//   }
+// };
 
 
 export { registerUser, loginUser, getProfile, updateProfile  }

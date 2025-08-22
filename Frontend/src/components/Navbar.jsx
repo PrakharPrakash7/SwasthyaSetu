@@ -7,7 +7,7 @@ const Navbar = () => {
 
   const navigate = useNavigate(); //navigate to different pages
   const [showMenu, setShowMenu] = useState(false);
-  const {token, setToken} = useContext(AppContext); // for logged in user
+  const {token, setToken,userData} = useContext(AppContext); // for logged in user
 
   const logout = ()=>{
 
@@ -57,9 +57,9 @@ const Navbar = () => {
     <div className='flex items-center gap-4'>
 
     { //if looged in then token is true then show profile picture else show the button of create account
-      token ? <div className='flex items-center gap-2 group relative cursor-pointer' >
+      token && userData ? <div className='flex items-center gap-2 group relative cursor-pointer' >
 
-        <img src={assets.profile_pic} alt="profile" className='w-8  rounded-full cursor-pointer' />
+            <img src={userData.image} alt="profile" className='w-8  rounded-full cursor-pointer' />
         <img src={assets.dropdown_icon} alt="dropdown" className='w-2.5 cursor-pointer'/>
 
         <div className='absolute top-0 right-0 pt-14 text-base font-medium text-gray-600 z-20 hidden group-hover:block'>
