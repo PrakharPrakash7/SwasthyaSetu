@@ -122,7 +122,6 @@ const MyAppointments = () => {
 
       if (data.success) {
         // Handle successful payment
-        
         initPay(data.order);
        
       } else {
@@ -163,10 +162,10 @@ const MyAppointments = () => {
         <div className='flex flex-col gap-2 justify-end'>
     {!item.cancelled && !item.payment && <p className=' sm:min-w-48 px-12 py-2 text-sm text-zinc-700  font-medium'>Fees : ₹{item.amount}</p>}
 
-        {!item.cancelled && item.payment && <button className='sm:min-w-48 py-2 border border-green-500 bg-purple-50   text-stone-500'>Paid</button>}
+        {!item.cancelled && item.payment && <button className='sm:min-w-48 py-2 border border-green-500 bg-green-50    text-green-500'>Paid</button>}
           {!item.cancelled && !item.payment &&  <button onClick={() => appointmentRazorpay(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border hover:bg-green-600 hover:text-white transition-all duration-300 '>Pay Online</button>}
          {!item.cancelled && <button onClick={() => cancelAppointment(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border hover:bg-red-600  hover:text-white transition-all duration-300 '>Cancel Appointment</button>}
-        {item.cancelled && <button className='sm:min-w-48 py-2 border border-red-500   text-red-500'>Appintment Cancelled</button>}
+        {item.cancelled && <button className='sm:min-w-48 py-2 border border-red-500 bg-red-50   text-red-500'>Appintment Cancelled</button>}
         </div>
      
       </div>
