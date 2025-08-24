@@ -43,7 +43,7 @@ const Login = () => {
                     //storing token in local storage so that if doctor refresh he will be login
                     localStorage.setItem('dtoken', data.token);
                     setDtoken(data.token);
-                    console.log(data.token)
+                  
 
                 }else{
                     toast.error(data.message);
