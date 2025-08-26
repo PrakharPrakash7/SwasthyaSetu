@@ -18,12 +18,12 @@ const DoctorAppointment = () => {
 
         <div>
         <p>#</p>
-        <p>Patient Details</p>
-        <p>Payment Status</p>
-        <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
+        <p>Patient </p>
+        <p>Payment </p>
+        <p>Age</p>
+        <p>Date & Time</p>
+        <p>Fees</p>
+        <p>Action</p>
 
         
           
