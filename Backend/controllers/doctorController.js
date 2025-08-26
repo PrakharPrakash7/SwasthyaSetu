@@ -80,7 +80,7 @@ const appointmentComplete = async (req,res) =>{
     try{
 
         const {docId, appointmentId} = req.body;
-        const appointmentData = appointmentModel.findById(appointmentId);
+        const appointmentData = await appointmentModel.findById(appointmentId);
 
         if(appointmentData && appointmentData.docId ===docId){
             appointmentModel.findByIdAndUpdate(appointmentId, { isCompleted: true });
@@ -103,7 +103,7 @@ const appointmentCancel = async (req,res) =>{
     try{
 
         const {docId, appointmentId} = req.body;
-        const appointmentData = appointmentModel.findById(appointmentId);
+        const appointmentData = await  appointmentModel.findById(appointmentId);
 
         if(appointmentData && appointmentData.docId ===docId){
             appointmentModel.findByIdAndUpdate(appointmentId, { cancelled: true });
