@@ -1,10 +1,11 @@
 import React, { useContext, useEffect } from 'react'
 import { DoctorContext } from '../../context/DoctorContext';
+import { AppContext } from '../../context/AppContext';
 
 const DoctorAppointment = () => {
 
   const {dtoken, appointments , getAppointments} = useContext(DoctorContext);
-
+  const {calculateAge} = useContext(AppContext);
   useEffect(() => {
     if(dtoken)
     getAppointments();
@@ -24,10 +25,24 @@ const DoctorAppointment = () => {
         <p>Date & Time</p>
         <p>Fees</p>
         <p>Action</p>
-
-        
           
         </div>
+        {
+          appointments.map((item,index)=>(
+            <div key={index}>
+              <p>{index+1}</p>
+              <div>
+                <img src={item.userData.image}/> <p>{item.userData.name}</p>
+              </div>
+              <div>
+                <p>
+                  {item.payment ? 'Online' : 'Cash'}
+                </p>
+              </div>
+              <p>{calculateAge(item.userData.dob)}</p>
+            </div>
+          ))
+        }
       </div>
     </div>
   )
