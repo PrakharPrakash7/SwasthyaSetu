@@ -23,7 +23,7 @@ const AppContextProvider = (props)=> {
     const currency='₹'
     const value = {
 
-        calculateAge,slotDateFormat,currency
+        calculateAge,slotDateFormat,currency,
 
     }
 
