@@ -1,10 +1,12 @@
 import React, { useContext, useEffect } from 'react'
 import { DoctorContext } from '../../context/DoctorContext';
 import { assets } from '../../assets/assets';
+import { AppContext } from '../../context/AppContext';
 const DoctorDashboard = () => {
 
 
   const{dtoken,dashData , setDashData , getDashData} = useContext(DoctorContext);
+  const {slotDateFormat} = useContext(AppContext);
 
   useEffect(()=>{
       if(dtoken)
