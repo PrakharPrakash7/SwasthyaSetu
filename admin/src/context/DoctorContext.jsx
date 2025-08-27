@@ -9,7 +9,7 @@ const DoctorContextProvider = (props)=> {
      const [dtoken , setDtoken] = useState(localStorage.getItem('dtoken')? localStorage.getItem('dtoken') :   '');
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
     const [appointments, setAppointments] = useState([]);
-
+    const [dashData, setDashData] = useState(false);
     const getAppointments = async ()=>{
         try{
             const {data} = await axios.get(`${backendUrl}/api/doctor/appointments`, {
@@ -18,7 +18,7 @@ const DoctorContextProvider = (props)=> {
                 }
             });
             if(data.success)
-            {setAppointments(data.appointments.reverse());
+            {setAppointments(data.appointments);
               
             }
             else {toast.error(data.message);}
@@ -66,12 +66,31 @@ const DoctorContextProvider = (props)=> {
         }
     }
 
+    const getDashData = async (req,res)=>{
+
+        try{
+            const {data} = await axios.get(`${backendUrl}/api/doctor/dashboard`, {
+                headers: {
+                    dtoken
+                }
+            });
+            if(data.success)
+            {
+                setDashData(data.dashData);
+            }
+            else {toast.error(data.message);}
+        } catch (error) {
+            console.error(error);
+            toast.error(error.message);
+        }
+    }
 
     const value = {
 
         backendUrl, dtoken , setDtoken,
         appointments, setAppointments, getAppointments, 
         completeAppointment, cancelAppointment,
+        dashData, setDashData, getDashData,
 
     }
 
