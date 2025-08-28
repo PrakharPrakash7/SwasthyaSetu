@@ -3,6 +3,7 @@ import { useState } from "react";
 import { createContext } from "react";
 import axios from "axios";
 import {toast} from 'react-toastify'
+
 export const DoctorContext = createContext();
 const DoctorContextProvider = (props)=> {
 
@@ -10,6 +11,7 @@ const DoctorContextProvider = (props)=> {
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
     const [appointments, setAppointments] = useState([]);
     const [dashData, setDashData] = useState(false);
+    const [profileData, setProfileData] = useState(false);
     const getAppointments = async ()=>{
         try{
             const {data} = await axios.get(`${backendUrl}/api/doctor/appointments`, {
@@ -85,12 +87,36 @@ const DoctorContextProvider = (props)=> {
         }
     }
 
+    const getProfileData = async (req,res)=>{
+        
+        try{
+
+            const {data} = await axios.get(`${backendUrl}/api/doctor/profile`, {
+                headers: {
+                    dtoken
+                }
+            });
+            if(data.success)
+            {
+                setProfileData(data.profile);
+               
+            }
+            else {toast.error(data.message);}
+        }
+        catch (error) {
+            console.error(error);
+            toast.error(error.message);
+        }
+
+    }
+
     const value = {
 
         backendUrl, dtoken , setDtoken,
         appointments, setAppointments, getAppointments, 
         completeAppointment, cancelAppointment,
-        dashData, setDashData, getDashData,
+        dashData, setDashData, getDashData,profileData,
+        setProfileData,getProfileData,
 
     }
 
