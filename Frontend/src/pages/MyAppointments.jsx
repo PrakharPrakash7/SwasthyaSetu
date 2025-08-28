@@ -160,12 +160,12 @@ const MyAppointments = () => {
         </div>
         <div></div>
         <div className='flex flex-col gap-2 justify-end'>
-    {!item.cancelled && !item.payment && <p className=' sm:min-w-48 px-12 py-2 text-sm text-zinc-700  font-medium'>Fees : ₹{item.amount}</p>}
-
-        {!item.cancelled && item.payment && <button className='sm:min-w-48 py-1 border rounded-md  bg-primary text-white bg-green-500   '>Paid</button>}
-          {!item.cancelled && !item.payment &&  <button onClick={() => appointmentRazorpay(item._id)} className='text-sm rounded-md text-stone-500  text-center sm:min-w-48 py-2 border hover:bg-green-600 hover:text-white transition-all duration-300 '>Pay Online</button>}
-         {!item.cancelled && <button onClick={() => cancelAppointment(item._id)} className='text-sm rounded-md text-stone-500 border   text-center sm:min-w-48 py-2   hover:bg-red-600  hover:text-white transition-all duration-300 '>Cancel Appointment</button>}
-        {item.cancelled && <button className='sm:min-w-48 py-1 border border-red-500 bg-red-50 rounded-md   text-red-500'>Appintment Cancelled</button>}
+    {!item.cancelled && !item.payment && !item.isCompleted && <p className=' sm:min-w-48 px-12 py-2 text-sm text-zinc-700  font-medium'>Fees : ₹{item.amount}</p>}
+        {!item.cancelled && item.payment && !item.isCompleted &&  <button className='sm:min-w-48 py-1 border rounded-md  bg-primary text-white bg-green-500   '>Paid</button>}
+          {!item.cancelled && !item.payment && !item.isCompleted &&   <button onClick={() => appointmentRazorpay(item._id)} className='text-sm rounded-md text-stone-500  text-center sm:min-w-48 py-2 border hover:bg-green-600 hover:text-white transition-all duration-300 '>Pay Online</button>}
+         {!item.cancelled && !item.isCompleted &&  <button onClick={() => cancelAppointment(item._id)} className='text-sm rounded-md text-stone-500 border   text-center sm:min-w-48 py-2   hover:bg-red-600  hover:text-white transition-all duration-300 '>Cancel Appointment</button>}
+        {item.cancelled && !item.isCompleted &&  <button className='sm:min-w-48 py-1 border border-red-500 bg-red-50 rounded-md   text-red-500'>Appintment Cancelled</button>}
+        {item.isCompleted &&  <button className='sm:min-w-48 py-1 border border-green-500 bg-green-50 rounded-md   text-green-500'> Completed</button>}
         </div>
      
       </div>
