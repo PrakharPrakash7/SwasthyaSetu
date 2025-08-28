@@ -198,7 +198,7 @@ const updateDoctorProfile = async (req,res) =>{
     }
     catch (error) {
         console.error(error);
-        toast.error(error.message);
+       
         res.json({ success: false, message: error.message });
     }
 
